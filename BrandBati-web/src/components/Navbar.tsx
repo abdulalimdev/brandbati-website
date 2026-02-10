@@ -47,8 +47,7 @@ export function Navbar() {
           <div className="flex h-18 items-center justify-between">
             {/* logo */}
             <a href="#" className="flex items-center gap-2 group">
-              <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-teal-brand to-teal-light transition-transform duration-300 group-hover:scale-110">
-                <img 
+              <img 
                     src="/logo.png" 
                     alt="Brandbati" 
                     className="h-10 w-auto object-contain" 
