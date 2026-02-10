@@ -48,7 +48,11 @@ export function Navbar() {
             {/* Logo */}
             <a href="#" className="flex items-center gap-2 group">
               <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-teal-brand to-teal-light transition-transform duration-300 group-hover:scale-110">
-                <span className="text-xl font-bold text-white font-poppins">B</span>
+                <img 
+                    src="/logo.png" 
+                    alt="Brandbati" 
+                    className="h-10 w-auto object-contain" 
+                    />
                 <div className="absolute -top-0.5 -right-0.5 h-3 w-3 rounded-full bg-yellow-brand animate-pulse" />
               </div>
               <span className="text-xl font-bold font-poppins text-teal-brand">
