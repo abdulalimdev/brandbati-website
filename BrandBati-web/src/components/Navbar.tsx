@@ -45,11 +45,21 @@ export function Navbar() {
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-18 items-center justify-between">
-           {/* logo */}
-            <a href="#" className="flex items-center gap-2 group">
-              <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-teal-brand to-teal-light transition-transform duration-300 group-hover:scale-110">
-              <img src="/logo.png" alt="Brandbati" className="h-10 w-auto object-contain" />
-
+           {/* Logo */}
+                <a href="#" className="flex items-center gap-2 group">
+                  <div className="relative flex items-center justify-center">
+                    <img 
+                      src="/logo.png" 
+                      alt="Brandbati" 
+                      className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
+                    />
+                    <div className="absolute -top-0.5 -right-0.5 h-3 w-3 rounded-full bg-yellow-brand animate-pulse ring-2 ring-white" />
+                  </div>
+                  <span className="text-xl font-bold font-poppins text-teal-brand">
+                    Brand<span className="text-yellow-brand">bati</span>
+                  </span>
+                
+                </a>
             {/* Desktop Links */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
