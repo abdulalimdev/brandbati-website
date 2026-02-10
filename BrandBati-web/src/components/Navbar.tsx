@@ -45,15 +45,10 @@ export function Navbar() {
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-18 items-center justify-between">
-            {/* logo */}
+           {/* logo */}
             <a href="#" className="flex items-center gap-2 group">
-              <img 
-                src="/logo.png" 
-                alt="Brandbati" 
-                className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-110" 
-              />
-              <span className="text-xl font-bold font-heading text-teal-900">Brandbati</span>
-            </a>
+              <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-teal-brand to-teal-light transition-transform duration-300 group-hover:scale-110">
+              <img src="/logo.png" alt="Brandbati" className="h-10 w-auto object-contain" />
 
             {/* Desktop Links */}
             <div className="hidden md:flex items-center gap-8">
