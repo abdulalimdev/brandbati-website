@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+/* ===========================
+   Brandbati — Custom Theme
+   =========================== */
+
+@theme {
+  /* Brand Colors */
+  --color-teal-brand: #008080;
+  --color-teal-dark: #006666;
+  --color-teal-light: #00a3a3;
+  --color-teal-50: #e6f5f5;
+  --color-teal-100: #b3e0e0;
+  --color-yellow-brand: #FFD700;
+  --color-yellow-dark: #c7a600;
+  --color-yellow-light: #ffe44d;
+  --color-dark-card: #0f1729;
+  --color-dark-card-2: #1a2332;
+
+  /* Typography */
+  --font-poppins: 'Poppins', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+}
+
+/* ===========================
+   Global Styles
+   =========================== */
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-inter);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Grid Background Pattern */
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(0, 128, 128, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 128, 128, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Subtle dot pattern */
+.dot-pattern {
+  background-image: radial-gradient(rgba(0, 128, 128, 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Glow effects */
+.glow-teal {
+  box-shadow: 0 0 20px rgba(0, 128, 128, 0.3), 0 0 60px rgba(0, 128, 128, 0.1);
+}
+
+.glow-yellow {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), 0 0 60px rgba(255, 215, 0, 0.1);
+}
+
+.glow-line {
+  background: linear-gradient(90deg, transparent, rgba(0, 128, 128, 0.5), rgba(255, 215, 0, 0.5), transparent);
+}
+
+/* Text gradient */
+.text-gradient {
+  background: linear-gradient(135deg, #008080, #00a3a3, #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #008080;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #006666;
+}
+
+/* Pulse animation for CTA */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 128, 128, 0.4); }
+  50% { box-shadow: 0 0 20px 10px rgba(0, 128, 128, 0); }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Gradient border */
+.gradient-border {
+  position: relative;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #008080, #FFD700);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
