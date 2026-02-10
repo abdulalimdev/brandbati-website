@@ -40,16 +40,21 @@ export function Footer() {
         <div className="py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            {/* Logo */}
-            <a href="#" className="inline-flex items-center gap-2 mb-4">
-              <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-teal-brand to-teal-light">
-                <span className="text-xl font-bold text-white font-poppins">B</span>
-                <div className="absolute -top-0.5 -right-0.5 h-3 w-3 rounded-full bg-yellow-brand" />
-              </div>
-              <span className="text-xl font-bold font-poppins text-white">
-                Brand<span className="text-yellow-brand">bati</span>
-              </span>
-            </a>
+            {/* Footer Logo Section */}
+                <div className="flex items-center gap-2 mb-4">
+                  <div className="relative">
+                    <img 
+                      src="/logo.png" 
+                      alt="Brandbati" 
+                      className="h-10 w-auto object-contain" 
+                    />
+                    <div className="absolute -top-1 -right-1 h-2.5 w-2.5 rounded-full bg-yellow-brand animate-pulse ring-2 ring-gray-900" />
+                  </div>
+                  
+                  <span className="text-xl font-bold font-poppins text-white">
+                    Brand<span className="text-yellow-brand">bati</span>
+                  </span>
+                </div>
             <p className="text-gray-400 text-sm leading-relaxed max-w-sm mb-6">
               Your global partner for digital growth and AI automation. We combine human creativity with AI power to build brands that stand out.
             </p>
