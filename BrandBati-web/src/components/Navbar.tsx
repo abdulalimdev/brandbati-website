@@ -48,15 +48,11 @@ export function Navbar() {
             {/* logo */}
             <a href="#" className="flex items-center gap-2 group">
               <img 
-                    src="/logo.png" 
-                    alt="Brandbati" 
-                    className="h-10 w-auto object-contain" 
-                    />
-                <div className="absolute -top-0.5 -right-0.5 h-3 w-3 rounded-full bg-yellow-brand animate-pulse" />
-              </div>
-              <span className="text-xl font-bold font-poppins text-teal-brand">
-                Brand<span className="text-yellow-brand">bati</span>
-              </span>
+                src="/logo.png" 
+                alt="Brandbati" 
+                className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-110" 
+              />
+              <span className="text-xl font-bold font-heading text-teal-900">Brandbati</span>
             </a>
 
             {/* Desktop Links */}
