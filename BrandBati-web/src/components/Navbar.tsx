@@ -47,14 +47,11 @@ export function Navbar() {
           <div className="flex h-18 items-center justify-between">
            {/* logo */}
                 <a href="#" className="flex items-center gap-2 group">
-                  <div className="relative flex items-center justify-center">
-                    <img 
-                      src="/logo.png" 
-                      alt="Brandbati" 
-                      className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105" 
-                    />
-                    <div className="absolute -top-0.5 -right-0.5 h-3 w-3 rounded-full bg-yellow-brand animate-pulse ring-2 ring-white" />
-                  </div>
+                      <img 
+                        src="/logo.png" 
+                        alt="Brandbati" 
+                        className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-110" 
+                      />
                   <span className="text-xl font-bold font-poppins text-teal-brand">
                     Brand<span className="text-yellow-brand">bati</span>
                   </span>
