@@ -45,7 +45,7 @@ export function Navbar() {
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-18 items-center justify-between">
-            {/* Logo */}
+            {/* logo */}
             <a href="#" className="flex items-center gap-2 group">
               <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-teal-brand to-teal-light transition-transform duration-300 group-hover:scale-110">
                 <img 
