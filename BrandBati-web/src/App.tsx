@@ -23,7 +23,7 @@ import { Portfolio } from "./components/Portfolio";
 import { WhyChooseUs } from "./components/WhyChooseUs";
 import { Contact } from "./components/Contact";
 import { Footer } from "./components/Footer";
-import { Chatbot } from "./components/Chatbot';
+import { Chatbot } from "./components/Chatbot";
 export function App() {
   return (
     <div className="min-h-screen bg-white font-inter antialiased">
