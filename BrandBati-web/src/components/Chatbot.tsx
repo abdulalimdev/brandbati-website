@@ -51,17 +51,22 @@ const Chatbot = () => {
 
               STRICT RULES:
               - DO NOT mention renovation, construction, or interior design services.
-              - Keep answers short, professional, and results-oriented.
+              - Keep answers short, professional, and results-oriented (max 2-3 sentences).
               - Use emojis to look modern 🚀🤖.
               - If asked for pricing or consultation, always say: "Please book a free strategy call here: https://go.brandbati.online"`
             },
             ...messages.filter(m => m.role !== 'system'), // পুরনো মেসেজ মনে রাখা
             userMessage
           ],
-          model: "llama3-8b-8192", // Super fast model
+          // ✅ FIX: মডেল নাম আপডেট করা হয়েছে (পুরনোটা বন্ধ হয়ে গিয়েছিল)
+          model: "llama-3.3-70b-versatile", 
           temperature: 0.7
         })
       });
+
+      if (!response.ok) {
+        throw new Error('API request failed');
+      }
 
       const data = await response.json();
       const botReply = data.choices[0]?.message?.content || "I am currently overloaded. Please email us.";
@@ -69,7 +74,7 @@ const Chatbot = () => {
       setMessages((prev) => [...prev, { role: 'assistant', content: botReply }]);
     } catch (error) {
       console.error(error);
-      setMessages((prev) => [...prev, { role: 'assistant', content: "Network error. Please try again." }]);
+      setMessages((prev) => [...prev, { role: 'assistant', content: "My AI brain is offline. Please try again later." }]);
     } finally {
       setLoading(false);
     }
