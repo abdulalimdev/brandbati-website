@@ -58,7 +58,7 @@ const Chatbot = () => {
             ...messages.filter(m => m.role !== 'system'), // পুরনো মেসেজ মনে রাখা
             userMessage
           ],
-          model: "mixtral-8x7b-32768", // Super fast model
+          model: "llama3-8b-8192", // Super fast model
           temperature: 0.7
         })
       });
