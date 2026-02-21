@@ -60,7 +60,7 @@ export function Footer() {
             </p>
             {/* Email */}
             <a
-              href="mailto:hello@brandbati.com"
+              href="mailto:hello@brandbati.online"
               className="inline-flex items-center gap-2 text-sm text-teal-light hover:text-teal-brand transition-colors"
             >
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
