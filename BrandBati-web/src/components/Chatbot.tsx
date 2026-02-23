@@ -4,13 +4,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
+  // 👋 ওয়েলকাম মেসেজটি একটু বেশি ফ্রেন্ডলি করা হয়েছে
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Hello! 👋 I am Brandbati AI. How can I help you grow your business today?' }
+    { role: 'assistant', content: 'Hi there! 👋 I am Brandbati AI. I can help you scale your business with Automation & Marketing. What are you working on today?' }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   
-  // অটোমেটিক স্ক্রল করার জন্য
   const messagesEndRef = useRef<null | HTMLDivElement>(null);
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -36,28 +36,23 @@ const Chatbot = () => {
           messages: [
             { 
               role: "system", 
-              content: `You are 'Brandbati AI', the smart sales assistant.
+              content: `You are 'Brandbati AI', a friendly and professional digital consultant (NOT a robot).
               
-              YOUR GOAL: Help clients choose a service and move them to WhatsApp for payment.
+              YOUR GOAL: Have a natural conversation. Explain services clearly. Only push for a sale when the user is interested.
 
-              OUR 3 MAIN SERVICES:
-              1. **AI Chatbot (Lifetime Deal):** 
-                 - Price: ৳25,000 (One-time).
-                 - Benefit: 24/7 Auto-reply, Lead collection, No monthly fee.
-              
-              2. **Digital Growth Pack:**
-                 - Price: ৳25,000 / month.
-                 - Benefit: Full social media management (12 Posts + 4 Reels + Ads).
-              
-              3. **Premium Branding:**
-                 - Price: ৳10,000.
-                 - Benefit: Logo, Brand Guidelines, Social Kit.
+              OUR SERVICES:
+              1. **AI Chatbot (Lifetime Deal):** A smart bot like you that handles clients 24/7.
+              2. **Digital Growth Pack:** Complete social media management & ads.
+              3. **Premium Branding:** Logo & Identity design.
 
-              INSTRUCTIONS:
-              - Keep answers short and exciting 🚀.
-              - If they ask about a service, explain briefly and give the WhatsApp link.
-              - **WhatsApp Link Format:** "Click here to order on WhatsApp: https://wa.me/8801784564410?text=I+am+interested+in+Brandbati+Services"
-              - If they ask generally, list the 3 services.`
+              BEHAVIOR RULES (Human-Like):
+              1. **Be Warm:** Use phrases like "That sounds great!", "I understand", "Let me explain".
+              2. **Don't Spam:** DO NOT give the WhatsApp link in the very first message unless they specifically ask to buy.
+              3. **Explain First:** If they ask "What is the Chatbot?", explain the benefits (e.g., "It saves time and captures leads automatically").
+              
+              WHEN TO GIVE LINK:
+              - ONLY give the WhatsApp link if the user asks for **PRICE**, **COST**, or says **"I WANT THIS"** / **"HOW TO BUY"**.
+              - Link Format: "Let's chat on WhatsApp to get this started: https://wa.me/8801784564410?text=I+am+interested+in+Brandbati+Services"`
             },
             ...messages.filter(m => m.role !== 'system'),
             userMessage
@@ -70,12 +65,12 @@ const Chatbot = () => {
       if (!response.ok) throw new Error('API Error');
 
       const data = await response.json();
-      const botReply = data.choices[0]?.message?.content || "Please contact us on WhatsApp.";
+      const botReply = data.choices[0]?.message?.content || "I can help with that! Could you elaborate?";
 
       setMessages((prev) => [...prev, { role: 'assistant', content: botReply }]);
     } catch (error) {
       console.error(error);
-      setMessages((prev) => [...prev, { role: 'assistant', content: "My AI brain is currently offline. Please refresh the page." }]);
+      setMessages((prev) => [...prev, { role: 'assistant', content: "My connection is a bit slow. Please try again in a moment!" }]);
     } finally {
       setLoading(false);
     }
@@ -83,7 +78,6 @@ const Chatbot = () => {
 
   return (
     <div className="fixed bottom-6 right-6 z-50 font-sans">
-      {/* গোল বাটন (Toggle Button) */}
       <motion.button
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
@@ -99,7 +93,6 @@ const Chatbot = () => {
         )}
       </motion.button>
 
-      {/* চ্যাট বক্স (Main Window) */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -108,7 +101,6 @@ const Chatbot = () => {
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
             className="absolute bottom-20 right-0 w-[85vw] md:w-96 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden flex flex-col h-[500px]"
           >
-            {/* ১. হেডার */}
             <div className="bg-gradient-to-r from-teal-700 to-teal-600 p-4 flex items-center gap-3 shadow-sm">
               <div className="bg-white/20 p-2 rounded-full backdrop-blur-sm">
                 <Bot className="text-white" size={24} />
@@ -121,7 +113,6 @@ const Chatbot = () => {
               </div>
             </div>
 
-            {/* ২. মেসেজ বডি (লিংক ক্লিকেবল করা হয়েছে) */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 scrollbar-hide">
               {messages.map((msg, index) => (
                 <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
@@ -140,7 +131,6 @@ const Chatbot = () => {
                 </div>
               ))}
               
-              {/* টাইপিং এনিমেশন */}
               {loading && (
                 <div className="flex justify-start">
                   <div className="bg-white p-3 rounded-2xl rounded-bl-none border border-gray-200 shadow-sm">
@@ -155,7 +145,6 @@ const Chatbot = () => {
               <div ref={messagesEndRef} />
             </div>
 
-            {/* ৩. ইনপুট এরিয়া */}
             <div className="p-3 bg-white border-t border-gray-100">
               <div className="flex gap-2 items-center bg-gray-50 px-3 py-2 rounded-full border border-gray-200 focus-within:border-teal-500 focus-within:ring-1 focus-within:ring-teal-500 transition-all">
                 <input
@@ -163,7 +152,7 @@ const Chatbot = () => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-                  placeholder="Ask about pricing..."
+                  placeholder="Ask anything..."
                   className="flex-1 bg-transparent focus:outline-none text-sm text-gray-700 placeholder-gray-400"
                 />
                 <button 
