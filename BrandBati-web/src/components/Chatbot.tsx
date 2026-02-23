@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
-    { role: 'assistant', content: 'Hello! 👋 I am Brandbati AI. Ready to automate your growth? Ask me anything!' }
+    { role: 'assistant', content: 'Hello! 👋 I am Brandbati AI. How can I help you grow your business today?' }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -36,45 +36,46 @@ const Chatbot = () => {
           messages: [
             { 
               role: "system", 
-              content: `You are 'Brandbati AI', the official intelligent assistant for Brandbati.
+              content: `You are 'Brandbati AI', the smart sales assistant.
               
-              YOUR IDENTITY:
-              - Brandbati is a **Global Hybrid Digital Agency**.
-              - We combine **Human Creativity** with **AI Automation**.
-              - We serve clients Worldwide (USA, UK, Europe, etc.).
+              YOUR GOAL: Help clients choose a service and move them to WhatsApp for payment.
 
-              OUR SERVICES (Focus on these):
-              1. **Branding & Identity:** Logo, Visuals, Brand Strategy.
-              2. **Digital Marketing:** Social Media Management, Content Creation.
-              3. **AI Automation:** Chatbots, CRM Setup, Workflow Automation.
-              4. **Brandbati Academy:** Training on Prompt Engineering.
+              OUR 3 MAIN SERVICES:
+              1. **AI Chatbot (Lifetime Deal):** 
+                 - Price: ৳25,000 (One-time).
+                 - Benefit: 24/7 Auto-reply, Lead collection, No monthly fee.
+              
+              2. **Digital Growth Pack:**
+                 - Price: ৳25,000 / month.
+                 - Benefit: Full social media management (12 Posts + 4 Reels + Ads).
+              
+              3. **Premium Branding:**
+                 - Price: ৳10,000.
+                 - Benefit: Logo, Brand Guidelines, Social Kit.
 
-              STRICT RULES:
-              - DO NOT mention renovation, construction, or interior design services.
-              - Keep answers short, professional, and results-oriented (max 2-3 sentences).
-              - Use emojis to look modern 🚀🤖.
-              - If asked for pricing or consultation, always say: "Please book a free strategy call here: https://go.brandbati.online"`
+              INSTRUCTIONS:
+              - Keep answers short and exciting 🚀.
+              - If they ask about a service, explain briefly and give the WhatsApp link.
+              - **WhatsApp Link Format:** "Click here to order on WhatsApp: https://wa.me/8801784564410?text=I+am+interested+in+Brandbati+Services"
+              - If they ask generally, list the 3 services.`
             },
-            ...messages.filter(m => m.role !== 'system'), // পুরনো মেসেজ মনে রাখা
+            ...messages.filter(m => m.role !== 'system'),
             userMessage
           ],
-          // ✅ FIX: মডেল নাম আপডেট করা হয়েছে (পুরনোটা বন্ধ হয়ে গিয়েছিল)
-          model: "llama-3.3-70b-versatile", 
+          model: "llama-3.3-70b-versatile",
           temperature: 0.7
         })
       });
 
-      if (!response.ok) {
-        throw new Error('API request failed');
-      }
+      if (!response.ok) throw new Error('API Error');
 
       const data = await response.json();
-      const botReply = data.choices[0]?.message?.content || "I am currently overloaded. Please email us.";
+      const botReply = data.choices[0]?.message?.content || "Please contact us on WhatsApp.";
 
       setMessages((prev) => [...prev, { role: 'assistant', content: botReply }]);
     } catch (error) {
       console.error(error);
-      setMessages((prev) => [...prev, { role: 'assistant', content: "My AI brain is offline. Please try again later." }]);
+      setMessages((prev) => [...prev, { role: 'assistant', content: "My AI brain is currently offline. Please refresh the page." }]);
     } finally {
       setLoading(false);
     }
@@ -90,7 +91,6 @@ const Chatbot = () => {
         className="bg-teal-600 text-white p-4 rounded-full shadow-2xl hover:bg-teal-700 transition-all flex items-center justify-center relative border-2 border-white/20"
       >
         {isOpen ? <X size={24} /> : <MessageCircle size={28} />}
-        {/* নোটিফিকেশন ডট */}
         {!isOpen && (
           <span className="absolute -top-1 -right-1 flex h-3 w-3">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
@@ -121,16 +121,21 @@ const Chatbot = () => {
               </div>
             </div>
 
-            {/* ২. মেসেজ বডি */}
+            {/* ২. মেসেজ বডি (লিংক ক্লিকেবল করা হয়েছে) */}
             <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 scrollbar-hide">
               {messages.map((msg, index) => (
                 <div key={index} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-                  <div className={`max-w-[85%] p-3 rounded-2xl text-sm shadow-sm ${
+                  <div className={`max-w-[85%] p-3 rounded-2xl text-sm shadow-sm whitespace-pre-wrap ${
                     msg.role === 'user' 
                       ? 'bg-teal-600 text-white rounded-br-none' 
                       : 'bg-white text-gray-800 border border-gray-200 rounded-bl-none'
                   }`}>
-                    {msg.content}
+                    {/* লিংকগুলো ক্লিকেবল করার লজিক */}
+                    {msg.content.split(/(https?:\/\/[^\s]+)/g).map((part, i) => 
+                      part.match(/^https?:\/\//) ? 
+                        <a key={i} href={part} target="_blank" rel="noopener noreferrer" className="text-blue-600 font-bold underline hover:text-blue-800 break-all">{part}</a> : 
+                        part
+                    )}
                   </div>
                 </div>
               ))}
@@ -158,7 +163,7 @@ const Chatbot = () => {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
-                  placeholder="Ask about our services..."
+                  placeholder="Ask about pricing..."
                   className="flex-1 bg-transparent focus:outline-none text-sm text-gray-700 placeholder-gray-400"
                 />
                 <button 
@@ -170,7 +175,7 @@ const Chatbot = () => {
                 </button>
               </div>
               <div className="text-center mt-2 text-[10px] text-gray-400 font-medium">
-                Powered by Brandbati Neural Network
+                Powered by Brandbati
               </div>
             </div>
           </motion.div>
