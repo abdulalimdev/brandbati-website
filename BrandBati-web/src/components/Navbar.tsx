@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const navLinks = [
   { label: "Services", href: "#services" },
-  { label: "AI Academy", href: "#academy" },
+  { label: "AI Academy", href: "https://academy.brandbati.online/" },
   { label: "Portfolio", href: "#portfolio" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
